@@ -8,7 +8,7 @@ SCREEN_HEIGHT :: 720
 main :: proc() {
 	// Initialize window
 	rl.SetConfigFlags({.MSAA_4X_HINT})
-	rl.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Main")
+	rl.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Game")
 	rl.SetTargetFPS(60)
 	defer rl.CloseWindow()
 
