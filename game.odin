@@ -5,6 +5,18 @@ import rl "vendor:raylib"
 SCREEN_WIDTH :: 1280
 SCREEN_HEIGHT :: 720
 
+Player :: struct {
+    x: i32,
+    y: i32,
+}
+
+move :: proc(player: ^Player) {
+    if (rl.IsKeyDown(rl.KeyboardKey.UP)) { player.y -= 5 }
+	if (rl.IsKeyDown(rl.KeyboardKey.DOWN)) { player.y += 5 }
+	if (rl.IsKeyDown(rl.KeyboardKey.LEFT)) { player.x -= 5 }
+	if (rl.IsKeyDown(rl.KeyboardKey.RIGHT)) { player.x += 5 }
+}
+
 main :: proc() {
 	// Initialize window
 	rl.SetConfigFlags({.MSAA_4X_HINT})
@@ -12,30 +24,13 @@ main :: proc() {
 	rl.SetTargetFPS(60)
 	defer rl.CloseWindow()
 
-	// State
-	x: i32 = SCREEN_WIDTH / 2
-	y: i32 = SCREEN_HEIGHT / 2
-
 	// Main game loop
+	player := Player{SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2}
 	for !rl.WindowShouldClose() {
-		// Update logic
-		if (rl.IsKeyDown(rl.KeyboardKey.UP)) {
-			y -= 5
-		}
-		if (rl.IsKeyDown(rl.KeyboardKey.DOWN)) {
-			y += 5
-		}
-		if (rl.IsKeyDown(rl.KeyboardKey.LEFT)) {
-			x -= 5
-		}
-		if (rl.IsKeyDown(rl.KeyboardKey.RIGHT)) {
-			x += 5
-		}
-
-		// Draw logic
+		move(&player)
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.SKYBLUE)
-		rl.DrawCircle(x, y, 64, rl.WHITE)
+		rl.DrawCircle(player.x, player.y, 64, rl.WHITE)
 		rl.EndDrawing()
 	}
 }
