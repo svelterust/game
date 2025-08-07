@@ -30,7 +30,7 @@ main :: proc() {
 		move(&player)
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.SKYBLUE)
-		rl.DrawCircle(player.x, player.y, 64, rl.WHITE)
+		rl.DrawRectangle(player.x, player.y, 96, 96, rl.WHITE)
 		rl.EndDrawing()
 	}
 }
